@@ -1,9 +1,8 @@
 <script setup lang="ts">
-const { latitude, longitude, getUserCoords } = useGeolocation()
+const { weatherData, getWeatherByCoords } = useWeather();
 
 onMounted(async () => {
-  await getUserCoords()
-  console.log(latitude.value, longitude.value)
+  await getWeatherByCoords()
 })
 </script>
 
