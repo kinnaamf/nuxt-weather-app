@@ -2,5 +2,15 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/fonts', '@nuxt/image', '@nuxtjs/tailwindcss']
+  modules: ['@nuxt/fonts', '@nuxt/image', '@nuxtjs/tailwindcss'],
+  tailwindcss: {
+    exposeConfig: true,
+    viewer: true,
+  },
+  runtimeConfig: {
+    public: {
+      baseUrl: process.env.BASE_URL,
+      apiKey: process.env.API_KEY
+    }
+  }
 })
