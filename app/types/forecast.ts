@@ -1,24 +1,24 @@
 export interface Forecast {
-  cloudCover: number
+  cloudcover: number
   conditions: string
   description: string
   dew: number
-  feelsLike: number
-  feelsLikeMax: number
-  feelsLikeMin: number
+  feelslike: number
+  feelslikemax: number
+  feelslikemin: number
   hours: Array<number>
   humidity: number
   icon: string
   precipitations: number
   pressure: number
   snow: number
-  severeRisk: number
+  severerisk: number
   temperature: number
-  temperatureMax: number
-  temperatureMin: number
-  uvIndex: number
+  temperaturemax: number
+  temperaturemin: number
+  uvindex: number
   visibility: number
-  windDir: number
-  windGust: number
-  windSpeed: number
+  winddir: number
+  windgust: number
+  windspeed: number
 }

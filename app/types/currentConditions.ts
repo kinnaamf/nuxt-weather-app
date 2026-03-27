@@ -1,18 +1,19 @@
 export interface CurrentCondition {
-  cloudCover: number
+  cloudcover: number
   conditions: string
-  feelsLike: number
+  description: string
+  feelslike: number
   humidity: number
   icon: string
-  precipitations: number
+  precip: number
   pressure: number
   snow: number
   sunrise: number
   sunset: number
-  temperature: number
-  uvIndex: number
+  temp: number
+  uvindex: number
   visibility: number
-  windDirection: number
-  windGust: number
-  windSpeed: number
+  winddir: number
+  windgust: number
+  windspeed: number
 }
