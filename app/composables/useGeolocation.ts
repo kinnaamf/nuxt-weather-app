@@ -2,8 +2,8 @@ import type { LocationData } from "~/types/locationData";
 import type { Coordinates } from "~/types/coordinates";
 
 export const useGeolocation = () => {
-  const error = ref<string | null>(null)
-  const loading = ref(false)
+  const error = ref<GeolocationPositionError | string | null>(null)
+  const loading = ref<boolean>(false)
   const locationData = ref<LocationData | null>(null)
 
   const getCoordinates = (): Promise<Coordinates> => {
@@ -52,10 +52,10 @@ export const useGeolocation = () => {
       return JSON.parse(cached);
     }
 
-    const response = await $fetch(
+    const data: any = await $fetch(
       `https://nominatim.openstreetmap.org/reverse`,
       {
-        params: {
+        query: {
           format: 'json',
           lat: latitude,
           lon: longitude,
@@ -66,7 +66,6 @@ export const useGeolocation = () => {
         }
       }
     )
-    const data: any = response
 
     const result = {
       city: data.address?.city || data.address?.town || data.address?.village || '',
@@ -95,15 +94,13 @@ export const useGeolocation = () => {
       locationData.value = result
       return result
     } catch (err: any) {
-      const errorMessage = err.code === 1
+      error.value = err.code === 1
         ? 'User declined geolocation usage'
         : err.code === 2
           ? 'Geolocation is not supported'
           : err.code === 3
             ? 'Connection timed out'
             : 'Could not get location'
-
-      error.value = errorMessage
       return null
     } finally {
       loading.value = false
