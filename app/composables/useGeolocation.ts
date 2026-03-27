@@ -13,12 +13,23 @@ export const useGeolocation = () => {
         return
       }
 
+      const cached = localStorage.getItem("coords");
+
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        resolve(parsed);
+        return;
+      }
+
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          resolve({
+          const coords = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-          })
+          }
+
+          localStorage.setItem("coords", JSON.stringify(coords));
+          resolve(coords);
         },
         (err) => {
           error.value = err
@@ -34,6 +45,13 @@ export const useGeolocation = () => {
   }
 
   const getCityCountry = async (latitude: number, longitude: number) => {
+    const key = `location_${latitude}_${longitude}`;
+    const cached = localStorage.getItem(key);
+
+    if (cached) {
+      return JSON.parse(cached);
+    }
+
     const response = await $fetch(
       `https://nominatim.openstreetmap.org/reverse`,
       {
@@ -50,10 +68,14 @@ export const useGeolocation = () => {
     )
     const data: any = response
 
-    return {
+    const result = {
       city: data.address?.city || data.address?.town || data.address?.village || '',
       country: data.address?.country || '',
     }
+
+    localStorage.setItem(key, JSON.stringify(result));
+
+    return result;
   }
 
   const getLocation = async (): Promise<LocationData | null> => {
