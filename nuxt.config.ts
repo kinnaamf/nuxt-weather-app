@@ -17,5 +17,6 @@ export default defineNuxtConfig({
       baseUrl: process.env.BASE_URL,
       apiKey: process.env.API_KEY
     }
-  }
+  },
+  css: ['~/assets/pcss/main.pcss']
 })
