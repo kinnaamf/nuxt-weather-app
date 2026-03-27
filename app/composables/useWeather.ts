@@ -18,20 +18,37 @@ export const useWeather = () => {
   const longitude = ref();
 
   const getUserWeather = async () => {
-    if (weatherData.value) return;
+    const cachedCoords = import.meta.client && localStorage.getItem("coords");
+    if (cachedCoords) {
+      const parsed = JSON.parse(cachedCoords);
+      latitude.value = parsed.latitude;
+      longitude.value = parsed.longitude;
+    } else {
+      const coords = await getCoordinates();
+      latitude.value = coords.latitude;
+      longitude.value = coords.longitude;
+    }
 
-    await getCoordinates().then((coordinates) => {
-      latitude.value = coordinates.latitude;
-      longitude.value = coordinates.longitude;
-    });
+    if (!latitude.value || !longitude.value) {
+      console.error("Coordinates not ready or not found");
+      return;
+    }
+
+    const hasCache = !!weatherData.value;
+
+    if (!hasCache) {
+      await getCoordinates().then((coordinates) => {
+        latitude.value = coordinates.latitude;
+        longitude.value = coordinates.longitude;
+      });
+    }
+
     try {
-      const response = await $fetch<Weather>(`${ BASE_URL }${ latitude.value },${ longitude.value }?key=${ API_KEY }`);
+      weatherData.value = await $fetch<Weather>(`${ BASE_URL }${ latitude.value },${ longitude.value }?key=${ API_KEY }`);
       console.log(weatherData.value);
 
-      weatherData.value = response;
-
       if (import.meta.client) {
-        localStorage.setItem("weather", JSON.stringify(response));
+        localStorage.setItem("weather", JSON.stringify(weatherData.value));
       }
     } catch (error) {
       console.error(error);
