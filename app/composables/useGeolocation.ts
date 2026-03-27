@@ -1,15 +1,12 @@
 interface Coordinates {
   latitude: number
   longitude: number
-  accuracy: number
 }
 
-interface Address {
-  country?: string
-  city?: string
-  state?: string
-  road?: string
-  fullAddress?: string
+interface LocationData {
+  city: string
+  country: string
+  coordinates: Coordinates
 }
 
 interface LocationData {
@@ -18,11 +15,11 @@ interface LocationData {
 }
 
 export const useGeolocation = () => {
-  const error = ref<GeolocationPositionError | null>(null)
+  const error = ref<string | null>(null)
   const loading = ref(false)
   const locationData = ref<LocationData | null>(null)
 
-  const getCoordinates = (options = {}): Promise<Coordinates> => {
+  const getCoordinates = (): Promise<Coordinates> => {
     return new Promise((resolve, reject) => {
       if (!import.meta.client || !navigator.geolocation) {
         reject(new Error("Geolocation is not supported"))
@@ -34,7 +31,6 @@ export const useGeolocation = () => {
           resolve({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            accuracy: position.coords.accuracy,
           })
         },
         (err) => {
@@ -45,16 +41,12 @@ export const useGeolocation = () => {
           enableHighAccuracy: true,
           timeout: 5000,
           maximumAge: 0,
-          ...options,
         }
       )
     })
   }
 
-  const getAddressFromCoords = async (
-    latitude: number,
-    longitude: number
-  ): Promise<Address> => {
+  const getCityCountry = async (latitude: number, longitude: number) => {
     const response = await $fetch(
       `https://nominatim.openstreetmap.org/reverse`,
       {
@@ -69,48 +61,52 @@ export const useGeolocation = () => {
         }
       }
     )
-
     const data: any = response
 
     return {
-      country: data.address?.country,
-      city: data.address?.city || data.address?.town || data.address?.village,
-      state: data.address?.state,
-      road: data.address?.road,
-      fullAddress: data.display_name,
+      city: data.address?.city || data.address?.town || data.address?.village || '',
+      country: data.address?.country || '',
     }
   }
 
-  const getFullLocation = async (): Promise<LocationData> => {
+  const getLocation = async (): Promise<LocationData | null> => {
     loading.value = true
     error.value = null
 
     try {
       const coords = await getCoordinates()
-      const address = await getAddressFromCoords(coords.latitude, coords.longitude)
+      const { city, country } = await getCityCountry(coords.latitude, coords.longitude)
 
       const result: LocationData = {
+        city,
+        country,
         coordinates: coords,
-        address: address,
       }
 
       locationData.value = result
-
       return result
     } catch (err: any) {
-      error.value = err
-      throw err
+      const errorMessage = err.code === 1
+        ? 'User declined geolocation usage'
+        : err.code === 2
+          ? 'Geolocation is not supported'
+          : err.code === 3
+            ? 'Connection timed out'
+            : 'Could not get location'
+
+      error.value = errorMessage
+      return null
     } finally {
       loading.value = false
     }
   }
 
+
   return {
     locationData,
     error,
     loading,
-    getFullLocation,
+    getLocation,
     getCoordinates,
-    getAddressFromCoords,
   }
 }
