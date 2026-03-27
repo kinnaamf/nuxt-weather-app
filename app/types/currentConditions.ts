@@ -8,8 +8,8 @@ export interface CurrentCondition {
   precip: number
   pressure: number
   snow: number
-  sunrise: number
-  sunset: number
+  sunrise: string
+  sunset: string
   temp: number
   uvindex: number
   visibility: number
