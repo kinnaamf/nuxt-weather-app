@@ -1,12 +1,12 @@
 export const useWeather = () => {
   const weatherData = useState("weatherData", () => null);
-  const { latitude, longitude, getUserCoords } = useGeolocation();
+  // const { latitude, longitude, getUserCoords } = useGeolocation();
   const config = useRuntimeConfig()
 
   const BASE_URL = config.public.baseUrl;
   const API_KEY = config.public.apiKey;
 
-  const getWeatherByCoords = async () => {
+  const getUserWeather = async () => {
     await getUserCoords();
     try {
       weatherData.value = await $fetch(`${ BASE_URL }${ latitude.value },${ longitude.value }?key=${ API_KEY }`);
@@ -17,6 +17,6 @@ export const useWeather = () => {
   }
 
   return {
-    weatherData, getWeatherByCoords
+    weatherData, getUserWeather
   }
 }
