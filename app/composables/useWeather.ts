@@ -1,5 +1,7 @@
+import type { Weather } from "~/types/weather";
+
 export const useWeather = () => {
-  const weatherData = useState("weatherData", () => null);
+  const weatherData = useState<Weather | null>("weatherData", () => null);
   const { getCoordinates } = useGeolocation();
   const config = useRuntimeConfig()
 

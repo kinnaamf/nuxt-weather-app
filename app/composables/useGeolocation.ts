@@ -1,18 +1,5 @@
-interface Coordinates {
-  latitude: number
-  longitude: number
-}
-
-interface LocationData {
-  city: string
-  country: string
-  coordinates: Coordinates
-}
-
-interface LocationData {
-  coordinates: Coordinates
-  address: Address
-}
+import type { LocationData } from "~/types/locationData";
+import type { Coordinates } from "~/types/coordinates";
 
 export const useGeolocation = () => {
   const error = ref<string | null>(null)
