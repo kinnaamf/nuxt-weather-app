@@ -6,6 +6,31 @@ export const useWeather = () => {
       const cached = localStorage.getItem("weather");
       return cached ? JSON.parse(cached) : null;
     }
+
+    return {
+      currentConditions: {
+        cloudcover: 0,
+        conditions: '',
+        description: '',
+        feelslike: 0,
+        humidity: 0,
+        icon: '',
+        precip: 0,
+        pressure: 0,
+        snow: 0,
+        sunrise: '',
+        sunset: '',
+        temp: 0,
+        uvindex: 0,
+        visibility: 0,
+        winddir: 0,
+        windgust: 0,
+        windspeed: 0,
+      },
+      description: '',
+      forecast: null,
+      hourlyForecast: null,
+    };
   });
 
   const { getCoordinates } = useGeolocation();
@@ -19,6 +44,7 @@ export const useWeather = () => {
 
   const getUserWeather = async () => {
     const cachedCoords = import.meta.client && localStorage.getItem("coords");
+
     if (cachedCoords) {
       const parsed = JSON.parse(cachedCoords);
       latitude.value = parsed.latitude;
