@@ -1,12 +1,22 @@
 <template>
-  <NuxtPage class="px-5 py-6"/>
+  <div class="app-wrapper">
+    <NuxtPage class="px-5 py-6"/>
+  </div>
 </template>
 
 <script setup lang="ts">
 useHead({
+
+  meta: [
+    {
+      name: 'theme-color', content: '#143F70',
+    },
+  ],
+  htmlAttrs: {
+    class: 'h-full'
+  },
   bodyAttrs: {
-    style: 'background: linear-gradient(180deg, #143F70 0%, #283F58 39.9%, #335F91 100%);',
-    class: 'min-h-screen'
+    class: 'h-full'
   }
 })
 </script>
