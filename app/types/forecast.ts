@@ -1,24 +1,67 @@
-export interface Forecast {
-  cloudcover: number
-  conditions: string
-  description: string
-  dew: number
-  feelslike: number
-  feelslikemax: number
-  feelslikemin: number
-  hours: Array<number>
-  humidity: number
-  icon: string
-  precipitations: number
-  pressure: number
-  snow: number
-  severerisk: number
-  temperature: number
-  temperaturemax: number
-  temperaturemin: number
-  uvindex: number
-  visibility: number
-  winddir: number
-  windgust: number
-  windspeed: number
+export interface ForecastDay {
+  datetime: string;
+  datetimeEpoch: number;
+  tempmax: number;
+  tempmin: number;
+  temp: number;
+  feelslikemax: number;
+  feelslikemin: number;
+  feelslike: number;
+  dew: number;
+  humidity: number;
+  precip: number;
+  precipprob: number;
+  precipcover: number;
+  preciptype: string[] | null;
+  snow: number;
+  snowdepth: number;
+  windgust: number;
+  windspeed: number;
+  winddir: number;
+  pressure: number;
+  cloudcover: number;
+  visibility: number;
+  solarradiation: number;
+  solarenergy: number;
+  uvindex: number;
+  severerisk: number;
+  sunrise: string;
+  sunriseEpoch: number;
+  sunset: string;
+  sunsetEpoch: number;
+  moonphase: number;
+  conditions: string;
+  description: string;
+  icon: string;
+  stations: string[] | null;
+  source: string;
+  hours?: HourlyForecast[];
+}
+
+export interface HourlyForecast {
+  datetime: string;
+  datetimeEpoch: number;
+  temp: number;
+  feelslike: number;
+  humidity: number;
+  dew: number;
+  precip: number;
+  precipprob: number;
+  snow: number;
+  snowdepth: number;
+  preciptype: string[] | null;
+  windgust: number;
+  windspeed: number;
+  winddir: number;
+  pressure: number;
+  visibility: number;
+  cloudcover: number;
+  solarradiation: number;
+  solarenergy: number;
+  uvindex: number;
+  severerisk: number;
+  conditions: string;
+  icon: string;
+  stations: string[] | null;
+  source: string;
 }
