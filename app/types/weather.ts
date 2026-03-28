@@ -1,9 +1,8 @@
 import type { CurrentCondition } from "~/types/currentConditions";
-import type { ForecastDay, HourlyForecast } from "~/types/forecast";
+import type { Forecast } from "~/types/forecast";
 
 export interface Weather {
   currentConditions: CurrentCondition
-  days: ForecastDay[]
-  hourlyForecast: HourlyForecast[]
+  days: Forecast[]
   description: string
 }
