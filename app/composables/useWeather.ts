@@ -43,7 +43,11 @@ export const useWeather = () => {
   const latitude = ref();
   const longitude = ref();
 
+  const isLoading = ref<boolean>(false);
+
   const getUserWeather = async () => {
+    isLoading.value = true;
+
     const cachedCoords = import.meta.client && localStorage.getItem("coords");
 
     if (cachedCoords) {
@@ -79,6 +83,8 @@ export const useWeather = () => {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      isLoading.value = false;
     }
   }
 
@@ -95,6 +101,7 @@ export const useWeather = () => {
 
   return {
     weatherData, getUserWeather,
-    currentTempCelsius, feelsLikeCelsius
+    currentTempCelsius, feelsLikeCelsius,
+    isLoading
   }
 }
