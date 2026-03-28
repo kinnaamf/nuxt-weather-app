@@ -33,6 +33,7 @@ export const useWeather = () => {
     };
   });
 
+  const { fahrenheitToCelsius } = useConversions()
   const { getCoordinates } = useGeolocation();
   const config = useRuntimeConfig()
 
@@ -81,7 +82,19 @@ export const useWeather = () => {
     }
   }
 
+  const currentTempCelsius = computed(() => {
+    if (!weatherData.value?.currentConditions.temp) return null;
+    return parseInt(fahrenheitToCelsius(weatherData.value.currentConditions.temp));
+  })
+
+  const feelsLikeCelsius = computed(() => {
+    if (!weatherData.value?.currentConditions.feelslike) return null;
+    return parseInt(fahrenheitToCelsius(weatherData.value.currentConditions.feelslike));
+
+  })
+
   return {
-    weatherData, getUserWeather
+    weatherData, getUserWeather,
+    currentTempCelsius, feelsLikeCelsius
   }
 }
