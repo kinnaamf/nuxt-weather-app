@@ -1,4 +1,4 @@
-export interface ForecastDay {
+export interface Forecast {
   datetime: string;
   datetimeEpoch: number;
   tempmax: number;
