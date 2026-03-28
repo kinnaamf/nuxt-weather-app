@@ -3,8 +3,6 @@ export const useConversions = () => {
     return (temp - 32) * 5 / 9;
   }
 
-
-
   return {
     fahrenheitToCelsius,
   }
