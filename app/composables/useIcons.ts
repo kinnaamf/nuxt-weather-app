@@ -12,47 +12,28 @@ import DropIcon from "~/ui/icons/DropIcon.vue";
 import EyeIcon from "~/ui/icons/EyeIcon.vue";
 import PressureIcon from "~/ui/icons/PressureIcon.vue"
 
-export const useWeatherIcons = () => {
-  const { weatherData } = useWeather();
-
-  const currentIcon = computed<string | null>(() => {
-    return weatherData.value.hourlyForecast?.[0]?.icon ?? null;
-  });
+export const useIcons = () => {
+  const iconMap: Record<string, any> = {
+    'snow': SnowIcon,
+    'rain': RainIcon,
+    'fog': FogIcon,
+    'wind': WindIcon,
+    'cloudy': CloudyIcon,
+    'partly-cloudy-day': CloudSunIcon,
+    'partly-cloudy-night': CloudMoonIcon,
+    'clear-day': SunIcon,
+    'clear-night': MoonIcon,
+    'thermometer': ThermometerIcon,
+    'drop': DropIcon,
+    'visibility': EyeIcon,
+    'pressure': PressureIcon,
+  };
 
   const getWeatherIcon = (icon: string) => {
-    switch (icon) {
-      case "snow":
-        return SnowIcon;
-      case "rain":
-        return RainIcon;
-      case "fog":
-        return FogIcon;
-      case "wind":
-        return WindIcon;
-      case "cloudy":
-        return CloudyIcon;
-      case "partly-cloudy-day":
-        return CloudSunIcon;
-      case "partly-cloudy-night":
-        return CloudMoonIcon;
-      case "clear-day":
-        return SunIcon;
-      case "clear-night":
-        return MoonIcon;
-      case "thermometer":
-        return ThermometerIcon;
-      case "drop":
-        return DropIcon;
-      case "visibility":
-        return EyeIcon;
-      case "pressure":
-        return PressureIcon;
-      default:
-        return CloudyIcon;
-    }
+    return iconMap[icon] || CloudyIcon;
   };
 
   return {
-    getWeatherIcon, currentIcon
+    getWeatherIcon,
   };
 };
