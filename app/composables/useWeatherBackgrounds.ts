@@ -10,7 +10,7 @@ export const useWeatherBackgrounds = () => {
 
     'cloudy': 'linear-gradient(180deg, #5A6B7D 0%, #3E4E5E 50%, #2A3844 100%)',
 
-    'partly-cloudy-day': 'linear-gradient(180deg, #F4A460 0%, #D88C4A 50%, #5B8FB9 100%)',
+    'partly-cloudy-day': 'linear-gradient(180deg, #5A6B7D 0%, #3E4E5E 50%, #2A3844 100%)',
 
     'partly-cloudy-night': 'linear-gradient(180deg, #2A3F5F 0%, #1E2D45 50%, #121B2B 100%)',
 
