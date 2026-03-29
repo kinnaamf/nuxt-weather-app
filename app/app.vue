@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper px-5 py-6">
+  <div class="app-wrapper px-5 py-6 pb-36">
     <NuxtPage class=""/>
   </div>
   <AppNavbar class="navbar-fixed"/>
