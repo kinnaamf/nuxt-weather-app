@@ -12,7 +12,7 @@
           >
             <component :is="link.icon" class="w-8 h-8"/>
           </div>
-          <span class="">{{ link.text }}</span>
+          <span>{{ link.text }}</span>
         </NuxtLink>
       </li>
     </ul>
@@ -42,5 +42,9 @@ const links = [
 
 .active {
   @apply bg-white/30
+}
+
+.navbar * {
+  color: #fff !important;
 }
 </style>
