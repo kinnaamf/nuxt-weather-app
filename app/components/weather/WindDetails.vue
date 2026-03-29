@@ -8,27 +8,31 @@
       <div class="flex flex-col gap-1">
         <div class="flex justify-between items-center">
           <h3>Wind speed</h3>
-          <span>{{ weatherData.currentConditions.windspeed }}km/h</span>
+          <span class="opacity-50">{{ weatherData.currentConditions.windspeed }}km/h</span>
         </div>
-        <hr>
+        <hr class="opacity-30">
         <div class="flex justify-between items-center">
         <h3>Wind gust</h3>
-          <span>{{ weatherData.currentConditions.windgust }}km/h</span>
+          <span class="opacity-50">{{ weatherData.currentConditions.windgust }}km/h</span>
         </div>
-        <hr>
+        <hr class="opacity-30">
         <div class="flex justify-between items-center">
         <h3>Wind direction</h3>
-          <span>{{ weatherData?.currentConditions.winddir }}&deg; {{ getWindDirection(wd) }}</span>
+          <span class="opacity-50">{{ weatherData?.currentConditions.winddir }}&deg; {{ getWindDirection(wd) }}</span>
         </div>
       </div>
     </div>
-    <div>
-
+    <div class="opacity/50">
+      <div class="circle flex items-center justify-center">
+        <ArrowIcon :style="{ transform: `rotate(calc(${wd}deg - 90deg))` }"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import ArrowIcon from "~/ui/icons/ArrowIcon.vue";
+
 const { getWeatherIcon } = useIcons()
 const { weatherData } = useWeather()
 
@@ -54,5 +58,9 @@ const getWindDirection = (winddir: number) => {
 <style scoped lang="postcss">
 .card {
   @apply border border-white/40 bg-white/25 rounded-3xl py-3 px-4
+}
+
+.circle {
+  @apply w-[100px] h-[100px] rounded-full border
 }
 </style>
