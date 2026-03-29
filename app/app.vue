@@ -1,6 +1,8 @@
 <template>
-  <div class="app-wrapper px-5 py-6 pb-36" :style="{ background: currentBackground }">
-    <NuxtPage class=""/>
+  <div class="app-wrapper px-5 py-6 pb-36">
+    <NuxtLayout>
+      <NuxtPage class=""/>
+    </NuxtLayout>
   </div>
   <AppNavbar class="navbar-fixed"/>
 </template>
@@ -11,14 +13,30 @@ import AppNavbar from "~/components/AppNavbar.vue";
 const { weatherData } = useWeather()
 const { getWeatherBackground } = useWeatherBackgrounds()
 
+const route = useRoute()
+
 const currentBackground = computed(() => {
   const icon = weatherData.value?.currentConditions.icon || 'cloudy';
   return getWeatherBackground(icon);
 })
 
-watch(currentBackground, (newBackground) => {
+const isLightPage = computed(() => {
+  return ['/search', '/favorites', "/settings"].includes(route.path)
+})
+
+watch([isLightPage, currentBackground], ([light, bg]) => {
   if (import.meta.client) {
-    document.body.style.setProperty('--weather-bg', newBackground);
+    const body = document.body;
+
+    if (light) {
+      body.classList.add("light-page");
+      body.style.backgroundColor = '#f2f1f7';
+    } else {
+      body.classList.remove("light-page");
+      body.style.backgroundColor = '';
+    }
+
+    document.documentElement.style.setProperty('--weather-bg', bg);
   }
 }, { immediate: true })
 
@@ -27,16 +45,21 @@ useHead({
     class: 'h-full'
   },
   bodyAttrs: {
-    class: 'h-full',
+    class: computed(() => isLightPage.value ? 'h-full light-page' : 'h-full')
   },
-  style: [
-    {
-      children: computed(() => `
-      body::before {
-        background: ${currentBackground.value}
-      }`)
-    }
-  ]
+  style: [{
+    children: computed(() => `
+      body:not(.light-page)::before {
+        background: ${ currentBackground.value } !important;
+      }
+      body.light-page {
+        background: #F2F1F7 !important;
+      }
+      body.light-page::before {
+        display: none !important;
+      }
+    `)
+  }]
 })
 </script>
 

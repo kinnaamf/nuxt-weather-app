@@ -4,7 +4,6 @@
   padding: 0;
 
   font-family: 'Inter', sans-serif;
-  color: #fff;
   font-size: 14px;
 }
 
@@ -21,6 +20,18 @@ body::before {
   z-index: -1;
   background: var(--weather-bg, linear-gradient(180deg, #143F70 0%, #283F58 39.9%, #335F91 100%));
   transition: background-color .5s ease-in-out;
+}
+
+body:not(.light-page) * {
+  color: #fff;
+}
+
+body.light-page * {
+  color: black !important;
+}
+
+body.light-page::before {
+  display: none !important;
 }
 
 .app-wrapper {
