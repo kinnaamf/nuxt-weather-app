@@ -31,10 +31,14 @@ export default defineNuxtConfig({
     host: '0.0.0.0'
   },
   app: {
-    head: {
-      meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
-      ],
+      head: {
+        meta: [
+          {
+            name: 'viewport',
+            content: 'width=device-width, initial-scale=1, viewport-fit=cover'
+          },
+          { name: 'theme-color', content: '#143F70' },
+        ],
+      },
     },
-  },
 })

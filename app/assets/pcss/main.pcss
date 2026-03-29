@@ -12,7 +12,6 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background: linear-gradient(180deg, #143F70 0%, #283F58 39.9%, #335F91 100%) fixed;
 }
 
 body::before {
@@ -20,13 +19,8 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-
-  background: linear-gradient(
-    180deg,
-    #143F70 0%,
-    #283F58 39.9%,
-    #335F91 100%
-  );
+  background: var(--weather-bg, linear-gradient(180deg, #143F70 0%, #283F58 39.9%, #335F91 100%));
+  transition: background-color .5s ease-in-out;
 }
 
 .app-wrapper {
