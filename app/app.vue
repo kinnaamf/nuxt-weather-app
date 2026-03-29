@@ -1,8 +1,8 @@
 <template>
   <div class="app-wrapper px-5 py-6">
     <NuxtPage class=""/>
-    <AppNavbar/>
   </div>
+  <AppNavbar class="navbar-fixed"/>
 </template>
 
 <script setup lang="ts">
@@ -20,3 +20,12 @@ useHead({
   }
 })
 </script>
+
+<style scoped lang="postcss">
+.navbar-fixed {
+  left: 1.25rem;
+  right: 1.25rem;
+  width: calc(100% - 2.5rem);
+  transform: none;
+}
+</style>
