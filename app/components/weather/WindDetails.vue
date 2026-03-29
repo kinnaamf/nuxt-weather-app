@@ -8,12 +8,12 @@
       <div class="flex flex-col gap-1">
         <div class="flex justify-between items-center">
           <h3>Wind speed</h3>
-          <span class="opacity-50">{{ weatherData.currentConditions.windspeed }}km/h</span>
+          <span class="opacity-50">{{ Math.round(weatherData.currentConditions.windspeed) }}km/h</span>
         </div>
         <hr class="opacity-30">
         <div class="flex justify-between items-center">
         <h3>Wind gust</h3>
-          <span class="opacity-50">{{ weatherData.currentConditions.windgust }}km/h</span>
+          <span class="opacity-50">{{ Math.round(weatherData.currentConditions.windgust) }}km/h</span>
         </div>
         <hr class="opacity-30">
         <div class="flex justify-between items-center">
