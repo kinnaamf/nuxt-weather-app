@@ -37,6 +37,10 @@ onMounted(async () => {
   await getUserWeather()
 })
 
+definePageMeta({
+  layout: false
+})
+
 const currentIcon = computed(() => {
   const icon = weatherData.value?.currentConditions.icon ?? 'cloudy';
   return getWeatherIcon(icon);
@@ -108,7 +112,7 @@ const secondItems = computed(() => {
     },
     {
       title: "Dew point",
-      value: `${ Math.round(fahrenheitToCelsius(currentValue.dew))}°C `,
+      value: `${ Math.round(fahrenheitToCelsius(currentValue.dew)) }°C `,
       description: dewDescription(currentValue.dew ?? 0),
       icon: getWeatherIcon("thermometer"),
     },
