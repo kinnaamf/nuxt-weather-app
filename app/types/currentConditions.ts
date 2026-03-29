@@ -3,6 +3,7 @@ export interface CurrentCondition {
   conditions: string
   description: string
   feelslike: number
+  dew: number
   humidity: number
   icon: string
   precip: number
