@@ -10,7 +10,7 @@
       </div>
     </div>
     <div>
-      <span class="text-sm opacity-50">{{ description }}</span>
+      <span class="text-sm opacity-50 whitespace-pre-line line-clamp-1">{{ description }}</span>
     </div>
   </div>
 </template>
