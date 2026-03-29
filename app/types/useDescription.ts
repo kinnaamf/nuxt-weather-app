@@ -40,9 +40,9 @@ export const useDescription = () => {
   };
 
   const pressureDescription = (p: number) => {
-    if (p > 1020) return "High pressure (stable weather)";
+    if (p > 1020) return "High pressure \n(stable weather)";
     if (p > 1000) return "Normal pressure";
-    return "Low pressure (possible rain)";
+    return "Low pressure \n(possible rain)";
   };
 
   const cloudDescription = (c: number) => {
@@ -85,9 +85,9 @@ export const useDescription = () => {
     uvDescription,
     solarDescription,
     visibilityDescription,
-    cloudDescription,
     precipDescription,
     pressureDescription,
-    windSpeedDescription
+    windSpeedDescription,
+    cloudDescription,
   }
 }
