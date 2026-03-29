@@ -1,16 +1,16 @@
 <template>
-  <div class="app-wrapper">
-    <NuxtPage class="px-5 py-6"/>
+  <div class="app-wrapper px-5 py-6">
+    <NuxtPage class=""/>
+    <AppNavbar/>
   </div>
 </template>
 
 <script setup lang="ts">
-useHead({
+import AppNavbar from "~/components/AppNavbar.vue";
 
+useHead({
   meta: [
-    {
-      name: 'theme-color', content: '#143F70',
-    },
+
   ],
   htmlAttrs: {
     class: 'h-full'
