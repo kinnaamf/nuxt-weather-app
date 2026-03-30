@@ -40,12 +40,33 @@ export const useWeather = () => {
 
   const fetchWeatherByLocation = async () => {
     const coords = await getCoordinates();
-    const query = `${coords.latitude},${coords.longitude}`;
+    const query = `${ coords.latitude },${ coords.longitude }`;
     return await fetchWeather(query);
   }
 
   const fetchWeatherByCity = async (cityName: string) => {
-    return await fetchWeather(cityName);
+    isLoading.value = true;
+    try {
+      const url = `${ BASE_URL }${ cityName }?key=${ API_KEY }`;
+      console.log('Fetching weather for: ', cityName);
+      console.log('API URL: ', url);
+
+      currentWeather.value = await $fetch(url);
+
+      console.log('API Response: ', {
+        resolvedAddress: currentWeather.value?.resolvedAddress,
+        address: currentWeather.value?.address,
+        latitude: currentWeather.value?.latitude,
+        longitude: currentWeather.value?.longitude,
+      })
+    } catch (error) {
+      console.log('Weather fetch failed', error);
+      currentWeather.value = null;
+      currentLocation.value = null;
+      return null;
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   const currentTempCelsius = computed(() => {
