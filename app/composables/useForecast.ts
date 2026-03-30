@@ -22,7 +22,10 @@ export const useForecast = (weatherData?: Ref<Weather | null>) => {
 
   const hourlyForecast = computed(() => {
     if(!sourceData.value?.days?.length) return []
-    return sourceData.value?.days[0]?.hours || []
+
+    const today = sourceData.value?.days[0]?.hours || []
+    const tomorrow = sourceData.value?.days[1]?.hours || []
+    return [...today, ...tomorrow];
   })
 
   const next24hours = computed(() => {

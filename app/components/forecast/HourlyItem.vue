@@ -15,7 +15,3 @@ const { formatTime, next24hours } = useForecast()
 const { getWeatherIcon } = useIcons()
 const { fahrenheitToCelsius } = useConversions()
 </script>
-
-<style scoped lang="postcss">
-
-</style>

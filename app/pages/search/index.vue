@@ -10,7 +10,7 @@
         <input
             type="text"
             placeholder="Search for a city..."
-            class="text-base outline-none flex-1"
+            class="outline-none flex-1 input"
             v-model="inputCity"
             @focus="isFocused = true"
             ref="inputRef"
@@ -80,5 +80,9 @@ const handleSearch = () => {
 
 .fade-enter-to {
   opacity: 1;
+}
+
+input {
+  font-size: 16px !important;
 }
 </style>
