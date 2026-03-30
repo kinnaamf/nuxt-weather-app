@@ -5,4 +5,7 @@ export interface Weather {
   currentConditions: CurrentCondition
   days: Forecast[]
   description: string
+  address: string
+  latitude: number
+  longitude: number
 }
