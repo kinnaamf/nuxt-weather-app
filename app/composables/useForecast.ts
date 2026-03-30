@@ -9,17 +9,6 @@ export const useForecast = (weatherData?: Ref<Weather | null>) => {
     return sourceData.value?.days?.slice(0, 7) || []
   });
 
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-  const formatDate = (dateString: string, index: number) => {
-    if (index === 0) return 'Today';
-
-    const date = new Date(dateString);
-    const dayIndex = date.getDay();
-
-    return weekDays[dayIndex];
-  }
-
   const hourlyForecast = computed(() => {
     if(!sourceData.value?.days?.length) return []
 
@@ -43,20 +32,9 @@ export const useForecast = (weatherData?: Ref<Weather | null>) => {
     return hourlyForecast.value.slice(start, start + 24);
   })
 
-  const formatTime = (timeString: string, index: number) => {
-    const hour = parseInt(timeString.split(':')[0]);
-    const currentHour = new Date().getHours();
-
-    if (index === 0) return 'Now';
-
-    return hour.toString().padStart(2, '0');
-  }
-
   return {
     weeklyForecast,
     hourlyForecast,
-    formatDate,
-    formatTime,
     next24hours,
   }
 }

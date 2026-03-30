@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-between">
     <div class="flex items-center">
-      <span class="opacity-75 font-semibold text-xl w-12">{{ formatDate(day.datetime, index) }}</span>
+      <span class="opacity-75 font-semibold text-xl w-12">{{ getWeekDay(day.datetime, index) }}</span>
       <component
           :is="getWeatherIcon(day.icon)"
           class="w-5 h-5 ml-8"
@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-
 import type { Forecast } from "~/types/forecast"
+import { getWeekDay } from "~/utils/date"
 
 defineProps<{
   day: Forecast,
@@ -31,7 +31,7 @@ defineProps<{
 }>()
 
 const { getWeatherIcon } = useIcons()
-const { weeklyForecast, formatDate } = useForecast()
+const { weeklyForecast } = useForecast()
 const { fahrenheitToCelsius } = useConversions()
 
 const overallMin = computed(() => {
@@ -44,7 +44,7 @@ const overallMax = computed(() => {
   return Math.max(...weeklyForecast.value.map(d => fahrenheitToCelsius(d.tempmax)))
 })
 
-const getRangeStyle = (day: ForecastDay) => {
+const getRangeStyle = (day: Forecast) => {
   const min = fahrenheitToCelsius(day.tempmin);
   const max = fahrenheitToCelsius(day.tempmax);
 

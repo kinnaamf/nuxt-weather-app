@@ -8,7 +8,7 @@ export const useWeather = () => {
   const { fahrenheitToCelsius } = useConversions();
   const { getCoordinates, getCityCountry } = useGeolocation();
 
-  const currentWeather = useState<Weather | Object>("currentWeather", () => null);
+  const currentWeather = useState<Weather | null>("currentWeather", () => null);
   const currentLocation = useState<{ city: string; country: string } | null>("currentLocation", () => null);
   const isLoading = useState<boolean>("weatherLoading", () => false);
 
