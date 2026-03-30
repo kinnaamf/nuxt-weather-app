@@ -1,8 +1,12 @@
-export const useForecast = () => {
-  const { weatherData } = useWeather();
+import type { Weather } from "~/types/weather";
+
+export const useForecast = (weatherData?: Ref<Weather | null>) => {
+  const { currentWeather } = useWeather();
+
+  const sourceData = weatherData || currentWeather;
 
   const weeklyForecast = computed(() => {
-    return weatherData.value?.days?.slice(0, 7) || []
+    return sourceData.value?.days?.slice(0, 7) || []
   });
 
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -17,8 +21,8 @@ export const useForecast = () => {
   }
 
   const hourlyForecast = computed(() => {
-    if(!weatherData.value?.days?.length) return []
-    return weatherData.value?.days[0]?.hours || []
+    if(!sourceData.value?.days?.length) return []
+    return sourceData.value?.days[0]?.hours || []
   })
 
   const next24hours = computed(() => {

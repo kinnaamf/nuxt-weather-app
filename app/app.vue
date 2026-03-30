@@ -10,13 +10,13 @@
 <script setup lang="ts">
 import AppNavbar from "~/components/AppNavbar.vue";
 
-const { weatherData } = useWeather()
+const { currentWeather } = useWeather()
 const { getWeatherBackground } = useWeatherBackgrounds()
 
 const route = useRoute()
 
 const currentBackground = computed(() => {
-  const icon = weatherData.value?.currentConditions.icon || 'cloudy';
+  const icon = currentWeather.value?.currentConditions.icon || 'cloudy';
   return getWeatherBackground(icon);
 })
 
