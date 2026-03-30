@@ -8,17 +8,17 @@
       <div class="flex flex-col gap-1">
         <div class="flex justify-between items-center">
           <h3>Wind speed</h3>
-          <span class="opacity-50">{{ Math.round(weatherData.currentConditions.windspeed) }}km/h</span>
+          <span class="opacity-50">{{ Math.round(currentWeather.currentConditions.windspeed) }}km/h</span>
         </div>
         <hr class="opacity-30">
         <div class="flex justify-between items-center">
         <h3>Wind gust</h3>
-          <span class="opacity-50">{{ Math.round(weatherData.currentConditions.windgust) }}km/h</span>
+          <span class="opacity-50">{{ Math.round(currentWeather.currentConditions.windgust) }}km/h</span>
         </div>
         <hr class="opacity-30">
         <div class="flex justify-between items-center">
         <h3>Wind direction</h3>
-          <span class="opacity-50">{{ weatherData?.currentConditions.winddir }}&deg; {{ getWindDirection(wd) }}</span>
+          <span class="opacity-50">{{ currentWeather?.currentConditions.winddir }}&deg; {{ getWindDirection(wd) }}</span>
         </div>
       </div>
     </div>
@@ -34,9 +34,9 @@
 import ArrowIcon from "~/ui/icons/ArrowIcon.vue";
 
 const { getWeatherIcon } = useIcons()
-const { weatherData } = useWeather()
+const { currentWeather } = useWeather()
 
-const wd = computed(() => { return weatherData.value?.currentConditions.winddir })
+const wd = computed(() => { return currentWeather.value?.currentConditions.winddir })
 
 const getWindDirection = (winddir: number) => {
   let direction;

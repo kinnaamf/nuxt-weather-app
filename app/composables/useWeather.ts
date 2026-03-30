@@ -20,11 +20,18 @@ export const useWeather = () => {
         `${ BASE_URL }${ query }?key=${ API_KEY }`
       )
 
+      console.log('Weather fetched', currentWeather.value)
+
       if (currentWeather.value?.latitude && currentWeather.value?.latitude) {
-        currentLocation.value = await getCityCountry(
+        const location = await getCityCountry(
           currentWeather.value?.latitude,
           currentWeather.value?.longitude
-        )
+        );
+        console.log('Location from getCityCountry', location);
+
+        currentLocation.value = location;
+
+        console.log('Current location', currentLocation.value);
       }
 
       return currentLocation.value;

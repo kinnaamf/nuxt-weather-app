@@ -1,6 +1,5 @@
 <template>
   <div class="main-container">
-
     <div v-if="isLoading">Loading...</div>
 
     <template v-else-if="currentWeather">
@@ -22,29 +21,56 @@
         <WeatherCurrentConditions :items="secondItems"/>
       </div>
     </template>
+    <div v-else>
+      <h3>City not found</h3>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import WeatherLocationData from "~/components/weather/WeatherLocationData.vue";
 import WindDetails from "~/components/weather/WindDetails.vue";
-import { useDescription } from "~/composables/useDescription";
 
-definePageMeta({
-  layout: false
-})
+const route = useRoute();
 
 const {
   currentWeather,
-  currentLocation,
+  // currentLocation,
   isLoading,
   currentTempCelsius,
   feelsLikeCelsius,
-  fetchWeatherByLocation,
-} = useWeather()
+  fetchWeatherByCity
+} = useWeather();
 
-const { getWeatherIcon } = useIcons()
-const { fahrenheitToCelsius } = useConversions()
+const {
+  fahrenheitToCelsius
+} = useConversions();
+
+const {
+  getWeatherIcon,
+} = useIcons();
+
+const {
+  getCityCountry
+} = useGeolocation();
+
+const cityName = decodeURIComponent(route.params.city as string);
+console.log('City from URL: ', cityName);
+
+const currentLocation = ref<Object>({  });
+
+onMounted(async () => {
+  await fetchWeatherByCity(cityName);
+   currentLocation.value = await getCityCountry(currentWeather.value?.latitude, currentWeather.value?.longitude)
+})
+
+watch(() => route.params.cityname, async (newCity) => {
+  if (newCity) {
+    const decodedCity = decodeURIComponent(newCity as string);
+    await getWeatherIcon(newCity)
+    await fetchWeatherByCity(decodedCity);
+  }
+})
 
 const currentIcon = computed(() => {
   const icon = currentWeather.value?.currentConditions.icon ?? 'cloudy';
@@ -59,10 +85,6 @@ const {
   precipDescription, pressureDescription,
   windSpeedDescription, cloudDescription
 } = useDescription();
-
-onMounted(async () => {
-  await fetchWeatherByLocation();
-})
 
 const current = computed(() => currentWeather.value?.currentConditions)
 

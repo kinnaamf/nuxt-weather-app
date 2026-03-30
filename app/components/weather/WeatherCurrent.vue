@@ -2,7 +2,7 @@
   <div class="flex justify-between items-center mb-7">
     <div>
       <h2 class="text-[5.625rem]">{{ currentTempCelsius }}<span class="text-4xl">&deg;C</span></h2>
-      <h3 class="opacity-70 text-xl">Partly cloudly{{ weatherData?.currentConditions.description }}</h3>
+      <h3 class="opacity-70 text-xl">Partly cloudly{{ currentWeather?.currentConditions.description }}</h3>
       <h4 class="opacity-50">Feels like {{ feelsLikeCelsius }}&deg;C</h4>
     </div>
     <div>
@@ -17,7 +17,7 @@
 <script setup lang="ts">
   defineProps<{
     currentTempCelsius: any;
-    weatherData?: any;
+    currentWeather?: any;
     feelsLikeCelsius: any;
     currentIcon: any;
   }>()

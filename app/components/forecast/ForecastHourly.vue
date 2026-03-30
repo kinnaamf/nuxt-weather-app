@@ -14,9 +14,6 @@ import HourlyList from "~/components/forecast/HourlyList.vue";
 const { hourlyForecast, } = useForecast()
 
 const { isLoading } = useWeather()
-onMounted(()=>{
-  console.log(hourlyForecast.value)
-})
 </script>
 
 <style scoped lang="postcss">

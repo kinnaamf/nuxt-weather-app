@@ -12,6 +12,6 @@
 import type { LocationData } from "~/types/locationData";
 
 defineProps<{
-  locationData: LocationData
+  locationData: LocationData | null | undefined
 }>()
 </script>

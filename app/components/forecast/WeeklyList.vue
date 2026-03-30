@@ -14,8 +14,7 @@
 <script setup lang="ts">
 import WeeklyItem from "~/components/forecast/WeeklyItem.vue";
 
-const { weeklyForecast } = useForecast()
-
+const { weeklyForecast } = useForecast();
 </script>
 
 <style scoped lang="postcss">

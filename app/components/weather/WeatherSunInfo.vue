@@ -6,7 +6,7 @@
       </div>
       <div>
         <h4 class="opacity-50 text-xs">Sunrise</h4>
-        <h3 class="font-semibold">{{ weatherData?.currentConditions.sunrise.slice(0, -3) }}</h3>
+        <h3 class="font-semibold">{{ currentWeather?.currentConditions.sunrise.slice(0, -3) }}</h3>
       </div>
     </div>
     <div class="w-px h-8 bg-white opacity-20"></div>
@@ -16,7 +16,7 @@
       </div>
       <div>
         <h4 class="opacity-50 text-xs">Sunset</h4>
-        <h3 class="font-semibold">{{ weatherData?.currentConditions.sunset.slice(0, -3) }}</h3>
+        <h3 class="font-semibold">{{ currentWeather?.currentConditions.sunset.slice(0, -3) }}</h3>
       </div>
     </div>
   </div>
@@ -24,6 +24,6 @@
 
 <script setup lang="ts">
 defineProps<{
-  weatherData?: Weather;
+  currentWeather?: Weather;
 }>()
 </script>
