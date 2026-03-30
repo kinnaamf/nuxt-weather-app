@@ -107,12 +107,12 @@ export const useGeolocation = () => {
     }
   }
 
-
   return {
     locationData,
     error,
     loading,
     getLocation,
     getCoordinates,
+    getCityCountry,
   }
 }
