@@ -3,7 +3,24 @@
     <div v-if="isLoading">Loading...</div>
 
     <template v-else-if="currentWeather">
-      <WeatherLocationData :locationData="currentLocation"/>
+      <div class="flex justify-between items-center">
+        <div
+            class="button-container"
+            @click="$router.push('/search')"
+        >
+          <CrossIcon/>
+        </div>
+        <div>
+          <WeatherLocationData :locationData="currentLocation"/>
+        </div>
+        <div
+            class="button-container"
+            @click="toggleFavorites(currentLocation)"
+            ref="favoriteLocation"
+        >
+          <HeartIcon :class="isFavorite(currentLocation) ? 'fill-white' : 'fill-transparent'"/>
+        </div>
+      </div>
 
       <WeatherCurrent
           :currentTempCelsius="currentTempCelsius"
@@ -30,12 +47,14 @@
 <script setup lang="ts">
 import WeatherLocationData from "~/components/weather/WeatherLocationData.vue";
 import WindDetails from "~/components/weather/WindDetails.vue";
+import CrossIcon from "~/ui/icons/CrossIcon.vue";
+import HeartIcon from "~/ui/icons/HeartIcon.vue";
 
 const route = useRoute();
+const router = useRouter();
 
 const {
   currentWeather,
-  // currentLocation,
   isLoading,
   currentTempCelsius,
   feelsLikeCelsius,
@@ -54,23 +73,29 @@ const {
   getCityCountry
 } = useGeolocation();
 
+const { toggleFavorites, isFavorite } = useFavorites();
+
 const cityName = decodeURIComponent(route.params.city as string);
 console.log('City from URL: ', cityName);
 
-const currentLocation = ref<Object>({  });
+const currentLocation = reactive({
+  city: '',
+  country: ''
+});
 
 onMounted(async () => {
   await fetchWeatherByCity(cityName);
-   currentLocation.value = await getCityCountry(currentWeather.value?.latitude, currentWeather.value?.longitude)
+  const loc = await getCityCountry(currentWeather.value?.latitude, currentWeather.value?.longitude)
+  Object.assign(currentLocation, loc);
 })
 
-watch(() => route.params.cityname, async (newCity) => {
-  if (newCity) {
-    const decodedCity = decodeURIComponent(newCity as string);
-    await getWeatherIcon(newCity)
-    await fetchWeatherByCity(decodedCity);
-  }
-})
+watch(() => route.params.city, async (newCity) => {
+  if (!newCity) return
+
+  const decodedCity = decodeURIComponent(newCity as string);
+  await getWeatherIcon(newCity)
+  await fetchWeatherByCity(decodedCity);
+}, { immediate: true })
 
 const currentIcon = computed(() => {
   const icon = currentWeather.value?.currentConditions.icon ?? 'cloudy';
@@ -149,10 +174,15 @@ const secondItems = computed(() => {
     },
   ]
 });
+
 </script>
 
 <style scoped lang="postcss">
 .main-container {
   @apply min-h-screen;
+}
+
+.button-container {
+  @apply bg-white/25 border border-white/10 rounded-full p-4
 }
 </style>
