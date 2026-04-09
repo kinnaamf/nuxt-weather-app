@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="opacity/50">
+    <div>
       <div class="circle flex items-center justify-center">
         <ArrowIcon :style="{ transform: `rotate(calc(${wd}deg - 90deg))` }"/>
       </div>
