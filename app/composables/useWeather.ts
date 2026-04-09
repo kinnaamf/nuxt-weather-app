@@ -55,17 +55,17 @@ export const useWeather = () => {
     isLoading.value = true;
     try {
       const url = `${ BASE_URL }${ cityName }?key=${ API_KEY }`;
-      console.log('Fetching weather for: ', cityName);
-      console.log('API URL: ', url);
+      // console.log('Fetching weather for: ', cityName);
+      // console.log('API URL: ', url);
 
       currentWeather.value = await $fetch(url);
 
-      console.log('API Response: ', {
+     /* console.log('API Response: ', {
         resolvedAddress: currentWeather.value?.resolvedAddress,
         address: currentWeather.value?.address,
         latitude: currentWeather.value?.latitude,
         longitude: currentWeather.value?.longitude,
-      })
+      })*/
     } catch (error) {
       console.log('Weather fetch failed', error);
       currentWeather.value = null;
@@ -74,6 +74,8 @@ export const useWeather = () => {
     } finally {
       isLoading.value = false;
     }
+
+    return currentWeather.value;
   }
 
   const currentTempCelsius = computed(() => {
