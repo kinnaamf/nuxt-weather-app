@@ -1,6 +1,7 @@
 export type Favorite = {
   city: string;
   country: string;
+  countryCode: string;
 }
 
 export const useFavorites = () => {
@@ -29,7 +30,11 @@ export const useFavorites = () => {
     if (index > -1) {
       favorites.value.splice(index, 1);
     } else {
-      favorites.value.push(location);
+      favorites.value.push({
+        city: location.city,
+        country: location.country,
+        countryCode: location.countryCode,
+      });
     }
 
     saveFavorites();
