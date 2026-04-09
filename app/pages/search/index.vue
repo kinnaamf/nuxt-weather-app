@@ -57,6 +57,7 @@ const handleSearch = () => {
   const city = encodeURIComponent(inputCity.value.trim().toLowerCase());
   router.push(`/search/${city}`);
 }
+
 </script>
 
 

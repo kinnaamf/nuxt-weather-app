@@ -60,6 +60,8 @@ export const useWeather = () => {
 
       currentWeather.value = await $fetch(url);
 
+      console.log(currentWeather.value)
+
      /* console.log('API Response: ', {
         resolvedAddress: currentWeather.value?.resolvedAddress,
         address: currentWeather.value?.address,
@@ -88,6 +90,16 @@ export const useWeather = () => {
     return Math.round(fahrenheitToCelsius(currentWeather.value.currentConditions.feelslike));
   })
 
+  const maxTempDay = computed(() => {
+    if (!currentWeather.value?.days) return null;
+    return currentWeather.value?.days[0]?.tempmax
+  })
+
+  const minTempDay = computed(() => {
+    if (!currentWeather.value?.days) return null;
+    return currentWeather.value?.days[0]?.tempmin
+  })
+
   return {
     currentWeather,
     currentLocation,
@@ -98,5 +110,8 @@ export const useWeather = () => {
 
     currentTempCelsius,
     feelsLikeCelsius,
+
+    maxTempDay,
+    minTempDay
   }
 }

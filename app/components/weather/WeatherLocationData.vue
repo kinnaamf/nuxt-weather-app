@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center mx-2">
+  <div class="mx-2">
     <div class="flex items-center gap-1 opacity-70 mb-1">
       <LucideMapPin :size="14"/>
       <span>{{ `${locationData?.city}, ${locationData?.country}` }}</span>
