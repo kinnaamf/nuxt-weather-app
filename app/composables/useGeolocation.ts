@@ -52,29 +52,39 @@ export const useGeolocation = () => {
       return JSON.parse(cached);
     }
 
-    const data: any = await $fetch(
-      `https://nominatim.openstreetmap.org/reverse`,
-      {
-        query: {
-          format: 'json',
-          lat: latitude,
-          lon: longitude,
-          'accept-language': 'en',
-        },
-        headers: {
-          'User-Agent': 'Nuxt Weather/1.0',
+    try {
+      const data: any = await $fetch(
+        `https://nominatim.openstreetmap.org/reverse`,
+        {
+          query: {
+            format: 'json',
+            lat: latitude,
+            lon: longitude,
+            'accept-language': 'en',
+          },
+          headers: {
+            'User-Agent': 'Nuxt Weather/1.0',
+          }
         }
+      )
+
+      const result = {
+        city: data.address?.city || data.address?.town || data.address?.village || '',
+        country: data.address?.country || '',
+        countryCode: data.address?.country_code?.toUpperCase() || ''
       }
-    )
 
-    const result = {
-      city: data.address?.city || data.address?.town || data.address?.village || '',
-      country: data.address?.country || '',
+      localStorage.setItem(key, JSON.stringify(result));
+
+      return result
+    } catch (error) {
+      console.log(error);
+      return {
+        city: 'Unknown',
+        country: 'Unknown',
+        countryCode: 'XX',
+      };
     }
-
-    localStorage.setItem(key, JSON.stringify(result));
-
-    return result;
   }
 
   const getLocation = async (): Promise<LocationData | null> => {
