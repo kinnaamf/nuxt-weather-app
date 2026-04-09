@@ -1,4 +1,4 @@
-type Favorite = {
+export type Favorite = {
   city: string;
   country: string;
 }

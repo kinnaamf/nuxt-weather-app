@@ -15,7 +15,7 @@
         </div>
         <div
             class="button-container"
-            @click="toggleFavorites(currentLocation)"
+            @click="toggleFavorites(currentLocation); console.log(favorites)"
             ref="favoriteLocation"
         >
           <HeartIcon :class="isFavorite(currentLocation) ? 'fill-white' : 'fill-transparent'"/>
@@ -73,7 +73,7 @@ const {
   getCityCountry
 } = useGeolocation();
 
-const { toggleFavorites, isFavorite } = useFavorites();
+const { toggleFavorites, isFavorite, favorites } = useFavorites();
 
 const cityName = decodeURIComponent(route.params.city as string);
 console.log('City from URL: ', cityName);

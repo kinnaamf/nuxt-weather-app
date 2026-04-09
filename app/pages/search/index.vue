@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex flex-col gap-8">
     <h3 class="text-3xl font-black mb-4">Search Cities</h3>
     <div class="flex items-center justify-between h-16 gap-3">
       <div class="bg-white w-full px-10 rounded-[24px] card flex gap-2 items-center h-full"
@@ -33,22 +33,18 @@
         </div>
       </Transition>
     </div>
+    <FavoritesContainer :favoritesList="favorites" />
   </div>
 </template>
 
 <script setup lang="ts">
-
 import SearchIcon from "~/ui/icons/SearchIcon.vue";
 import CrossIcon from "~/ui/icons/CrossIcon.vue";
 
+const { favorites } = useFavorites();
 const inputCity = ref<string>('');
-
-const { getSearchWeather } = useWeather();
-
 const isFocused = ref<boolean>(false);
-
 const inputRef = ref<HTMLInputElement | null>(null);
-
 const router = useRouter();
 
 const focusInput = () => {
