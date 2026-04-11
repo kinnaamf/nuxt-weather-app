@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-8">
-    <h3 class="text-3xl font-black mb-4">Search Cities</h3>
+    <h3 class="text-3xl font-black mb-4">Weather</h3>
     <div class="flex items-center justify-between h-16 gap-3">
       <div class="bg-white w-full px-10 rounded-[24px] card flex gap-2 items-center h-full"
            :class="{ 'w-full' : !inputCity, 'w-[calc(100%-3rem)]': inputCity }"
