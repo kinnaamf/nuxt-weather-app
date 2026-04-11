@@ -33,7 +33,7 @@
         </div>
       </Transition>
     </div>
-    <FavoritesContainer :favoritesList="favorites" />
+    <SearchFavoritesContainer :favoritesList="favorites" />
   </div>
 </template>
 

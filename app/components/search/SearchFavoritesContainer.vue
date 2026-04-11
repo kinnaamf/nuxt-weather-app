@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 gap-3">
-    <FavoritesCard
+    <SearchFavoritesCard
         v-for="(favorite, index) in favoritesList"
         :key="index"
         :favorite="favorite"
