@@ -21,7 +21,7 @@ const currentBackground = computed(() => {
 })
 
 const isLightPage = computed(() => {
-  return ['/search', '/favorites', "/settings"].includes(route.path)
+  return ['/search', '/search', "/settings"].includes(route.path)
 })
 
 watch([isLightPage, currentBackground], ([light, bg]) => {
