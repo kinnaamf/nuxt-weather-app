@@ -37,7 +37,7 @@
                 </div>
               </div>
               <div>
-                <LucideHeart :size="20" fill="pink" @click="console.log(favorite)"/>
+                <LucideHeart :size="20" fill="pink" @click="toggleFavorites(favorite)"/>
               </div>
             </div>
           </div>
@@ -76,10 +76,10 @@ const currentBackground = computed(() => {
   return getWeatherBackground(icon);
 })
 
-
 watch(currentBackground, (val) => {
   console.log('BG:', val);
 });
+
 onMounted(async () => {
   try {
     loading.value = true;
@@ -102,8 +102,7 @@ onMounted(async () => {
     const addressDetails = await getCityCountry(weather.value?.latitude, weather.value?.longitude);
     console.log(addressDetails);
 
-    console.log('Weather set to:', weather.value);
-
+    // console.log('Weather set to:', weather.value);
   } catch (e) {
     console.error('Error loading weather:', e);
     error.value = e instanceof Error ? e.message : 'Ошибка загрузки погоды';
