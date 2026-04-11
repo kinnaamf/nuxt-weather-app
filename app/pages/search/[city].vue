@@ -49,31 +49,23 @@ import WeatherLocationData from "~/components/weather/WeatherLocationData.vue";
 import WindDetails from "~/components/weather/WindDetails.vue";
 import CrossIcon from "~/ui/icons/CrossIcon.vue";
 import HeartIcon from "~/ui/icons/HeartIcon.vue";
+import { useFavorites } from "~/composables/useFavorites";
 
 const route = useRoute();
-const router = useRouter();
 
-const {
-  currentWeather,
-  isLoading,
-  currentTempCelsius,
-  feelsLikeCelsius,
-  fetchWeatherByCity
-} = useWeather();
-
-const {
-  fahrenheitToCelsius
-} = useConversions();
-
-const {
-  getWeatherIcon,
-} = useIcons();
-
-const {
-  getCityCountry
-} = useGeolocation();
-
+const { currentWeather, isLoading, currentTempCelsius, feelsLikeCelsius, fetchWeatherByCity } = useWeather();
+const { fahrenheitToCelsius } = useConversions();
+const { getWeatherIcon } = useIcons();
+const { getCityCountry } = useGeolocation();
 const { toggleFavorites, isFavorite, favorites } = useFavorites();
+const {
+  humidityDescription, temperatureDescription,
+  dewDescription, snowDescription,
+  snowDepthDescription, uvDescription,
+  solarDescription, visibilityDescription,
+  precipDescription, pressureDescription,
+  windSpeedDescription, cloudDescription
+} = useDescription();
 
 const cityName = decodeURIComponent(route.params.city as string);
 console.log('City from URL: ', cityName);
@@ -101,15 +93,6 @@ const currentIcon = computed(() => {
   const icon = currentWeather.value?.currentConditions.icon ?? 'cloudy';
   return getWeatherIcon(icon);
 })
-
-const {
-  humidityDescription, temperatureDescription,
-  dewDescription, snowDescription,
-  snowDepthDescription, uvDescription,
-  solarDescription, visibilityDescription,
-  precipDescription, pressureDescription,
-  windSpeedDescription, cloudDescription
-} = useDescription();
 
 const current = computed(() => currentWeather.value?.currentConditions)
 
