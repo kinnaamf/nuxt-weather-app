@@ -90,7 +90,7 @@ onMounted(async () => {
       },
       {
         title: 'Wind',
-        info: `${ Math.round(weather.value?.currentConditions.windspeed) } kp/h`
+        info: `${ Math.round(weather.value?.currentConditions.windspeed) } km/h`
       },
       {
         title: 'UV Index',
