@@ -25,7 +25,8 @@
           <div>
             <h2 class="text-[56px]">{{ Math.round(fahrenheitToCelsius(weather.currentConditions.temp)) }}&deg;C</h2>
             <h3>{{ weather.currentConditions.description }}</h3>
-            <h3 class="opacity-50 text-sm">H: {{ Math.round(fahrenheitToCelsius(maxTempDay)) }}&deg; - L: {{ Math.round(fahrenheitToCelsius(minTempDay)) }}&deg;</h3>
+            <h3 class="opacity-50 text-sm">H: {{ Math.round(fahrenheitToCelsius(maxTempDay)) }}&deg; - L:
+                                           {{ Math.round(fahrenheitToCelsius(minTempDay)) }}&deg;</h3>
           </div>
           <div>
             <component class="align-bottom h-[72px] w-[72px]" :is="getWeatherIcon(weather.currentConditions.icon)"/>
@@ -85,19 +86,19 @@ onMounted(async () => {
     weatherData.value = [
       {
         title: 'Humidity',
-        info: `${Math.round(weather.value?.currentConditions.humidity)}%`
+        info: `${ Math.round(weather.value?.currentConditions.humidity) }%`
       },
       {
         title: 'Wind',
-        info: `${Math.round(weather.value?.currentConditions.windspeed)} kp/h`
+        info: `${ Math.round(weather.value?.currentConditions.windspeed) } kp/h`
       },
       {
         title: 'UV Index',
-        info: `${weather.value?.currentConditions.uvindex}`
+        info: `${ weather.value?.currentConditions.uvindex }`
       },
       {
         title: 'Precipitation',
-        info: `${weather.value?.currentConditions.precip}mm`
+        info: `${ Math.round(weather.value?.currentConditions.precip) }mm`
       }
     ]
 
