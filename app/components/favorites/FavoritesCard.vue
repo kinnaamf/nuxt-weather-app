@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="p-2 bg-white/20 rounded-full">
-            <HeartIcon fill="white"/>
+            <HeartIcon fill="white" @click.prevent="toggleFavorites(favorite)"/>
           </div>
         </div>
         <!-- TOP SECTION -->
@@ -62,14 +62,15 @@ const props = defineProps<{
 }>()
 
 const { fetchWeatherByCity, maxTempDay, minTempDay } = useWeather();
-const { getWeatherBackground } = useWeatherBackgrounds()
+const { getWeatherBackground } = useWeatherBackgrounds();
 const { fahrenheitToCelsius } = useConversions();
-const { getWeatherIcon } = useIcons()
+const { getWeatherIcon } = useIcons();
+const { toggleFavorites } = useFavorites();
 
 
 const weather = ref<Weather>();
-const loading = ref(true);
-const error = ref(false);
+const loading = ref<boolean>(true);
+const error = ref<boolean>(false);
 const weatherData = ref();
 
 const currentBackground = computed(() => {
