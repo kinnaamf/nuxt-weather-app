@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-8">
+  <div class="my-container mt-8">
     <div class="title mb-2">
       <h3 class="uppercase font-semibold opacity-50">7-day forecast</h3>
     </div>
@@ -15,7 +15,7 @@ import WeeklyList from "~/components/forecast/WeeklyList.vue";
 </script>
 
 <style scoped lang="postcss">
-.container {
-  @apply p-4 border rounded-3xl border-white/10 bg-white/25;
+.my-container {
+  @apply p-4 border rounded-3xl border-white/10 bg-white/25 w-full;
 }
 </style>

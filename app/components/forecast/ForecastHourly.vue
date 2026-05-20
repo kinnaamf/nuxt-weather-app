@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="!isLoading && hourlyForecast.length">
+  <div class="my-container" v-if="!isLoading && hourlyForecast.length">
     <div class="title mb-2">
       <h3 class="uppercase font-semibold opacity-50">Hourly forecast</h3>
     </div>
@@ -17,7 +17,7 @@ const { isLoading } = useWeather()
 </script>
 
 <style scoped lang="postcss">
-.container {
-  @apply p-4 border rounded-3xl border-white/10 bg-white/25;
+.my-container {
+  @apply p-4 border rounded-3xl border-white/10 bg-white/25 ;
 }
 </style>
