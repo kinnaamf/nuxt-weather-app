@@ -23,11 +23,11 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/pcss/main.pcss'],
 
-  devServer: {
+  devServer: {/*
     https: {
         key: './localhost+3-key.pem',
         cert: './localhost+3.pem'
-    },
+    },*/
     host: '0.0.0.0'
   },
   app: {
