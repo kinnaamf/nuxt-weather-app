@@ -11,7 +11,7 @@ A mobile-first web application designed for real-time weather tracking on smartp
 
 ### 1. Clone the repository
 ```bash
-git clone [https://github.com/kinnaamf/nuxt-weather-app.git](https://github.com/kinnaamf/nuxt-weather-app.git)
+git clone https://github.com/kinnaamf/nuxt-weather-app.git
 cd nuxt-weather-app
 ```
 ### 2. Install dependencies
