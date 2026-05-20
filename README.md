@@ -31,3 +31,5 @@ npm run dev
 # or
 npx nuxt dev
 ```
+### 5. Local HTTPS (Optional)
+If you want to run the app via HTTPS locally, generate your own certificates using `mkcert` and place them in the root directory.
