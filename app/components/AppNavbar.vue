@@ -35,7 +35,7 @@ const links = [
 
 <style scoped lang="postcss">
 .navbar {
-  @apply border border-white/10 py-3
+  @apply border border-white/10 py-2 max-w-[430px] mx-auto
   rounded-3xl fixed bottom-4 backdrop-blur-md;
   background: rgba(51, 51, 51, 0.50);
 }
